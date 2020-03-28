@@ -1,11 +1,8 @@
-use iron::prelude::*;
-use iron::status;
+use iron::Iron;
 
-fn hello_world(_: &mut Request) -> IronResult<Response> {
-    Ok(Response::with((status::Ok, "Hello World!")))
-}
+mod web;
 
 fn main() {
-    let _server = Iron::new(hello_world).http("localhost:3000").unwrap();
+    let _server = Iron::new(web::router::app()).http("localhost:3000").unwrap();
     println!("On 3000");
 }
